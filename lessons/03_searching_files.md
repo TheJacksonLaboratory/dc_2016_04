@@ -191,7 +191,7 @@ $ cut -f3 SraRunTable.txt | grep PAIRED | wc -l
 2) How many of each class of library layout are there?
 
 We can use some new tools 'sort' and 'uniq' to extract more information.  For example, cut the third column, remove the
-header and sort the values.  The '-v' option for greap means return all lines that DO NOT match.
+header and sort the values.  The '-v' option for grep means return all lines that DO NOT match.
 
 ```bash
 $ cut -f3 SraRunTable.txt | grep -v LibraryLayout_s | sort
@@ -237,7 +237,7 @@ $ grep PAIRED SraRunTable.txt > SraRunTable_only_paired_end.txt
 
 2) How many samples were loaded on each date
 
-3) Filter subsets into new files bases on load date
+3) Filter subsets into new files based on load date
 ****
 
  
@@ -272,3 +272,8 @@ the command line, automate something you don't really need to automate.
 **Chaining commands together**
 
 **md5sum**
+
+## Useful Links (JAX)
+
+* [Introduction to HPC Workshop Link](https://thejacksonlaboratory.github.io/introduction-to-hpc/)
+* [Shell Novice Command List](https://gist.github.com/rizkaz/f87e88d7bf73a2a7fdcd58e0a7d4aafa#file-shell-novice-cheatsheet-md)

@@ -36,7 +36,7 @@ Type in the following lines in the `listing.sh` file:
 	echo "Your current working directory is:"
 	pwd
 	echo "These are the contents of this directory:"
-	ls -l 
+	ls -lFh 
 
 >The `echo` command is a utility for writing to standard output. By providing text in quotations after the command we indicated what it is we wanted written
 
