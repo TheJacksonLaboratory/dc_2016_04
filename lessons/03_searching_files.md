@@ -277,3 +277,63 @@ the command line, automate something you don't really need to automate.
 
 * [Introduction to HPC Workshop Link](https://thejacksonlaboratory.github.io/introduction-to-hpc/)
 * [Shell Novice Command List](https://gist.github.com/rizkaz/f87e88d7bf73a2a7fdcd58e0a7d4aafa#file-shell-novice-cheatsheet-md)
+
+
+SOLUTIONS:
+
+Exercise 1: Searching files
+1) Search for the sequence GNATNACCACTTCC in SRR098026.fastq. 
+In addition to finding the sequence, have your search also return the name of the sequence.
+
+`grep -B1 GNATNACCACTTCC SRR098026.fastq`
+
+    @SRR098026.245 HWUSI-EAS1599_1:2:1:2:801 length=35
+    GNATNACCACTTCCAGTGCTGANNNNNNNGGGATG
+
+2) Search for that sequence in both fastq files.
+
+`grep -B1 GNATNACCACTTCC *.fastq`
+
+    @SRR098026.245 HWUSI-EAS1599_1:2:1:2:801 length=35
+    GNATNACCACTTCCAGTGCTGANNNNNNNGGGATG
+
+Exercise 2: Practicing searching and redirection
+1) How many sample load dates are there?
+
+`cut -f5 SraRunTable.txt | grep -v LoadDate_s | sort | uniq`
+
+    25-Jul-12
+    29-May-14
+
+2) How many samples were loaded on each date.
+
+`cut -f5 SraRunTable.txt | grep -v LoadDate_s | sort | uniq -c`
+  
+    6 25-Jul-12
+    31 29-May-14
+
+3) Filter subsets into new files based on load date.
+
+```
+head -n 1 SraRunTable.txt > SraRunTable_25-Jul-12.txt
+grep 25-Jul-12 SraRunTable.txt >> SraRunTable_25-Jul-12.txt
+head -n 1 SraRunTable.txt > SraRunTable_29-May-14.txt
+grep 29-May-14 SraRunTable.txt >> SraRunTable_29-May-14.txt
+```
+
+Lookahead : Using Loops - Next Section 
+
+```
+# Save the unique days in a variable
+dates=`cut -f5 SraRunTable.txt | grep -v LoadDate_s | sort | uniq`
+echo $dates
+
+# Loop through dates to create sub samples
+for date in $dates
+do 
+    echo "processing $date"
+    head -n 1 SraRunTable.txt > SraRunTable$date.txt
+    grep $date SraRunTable.txt >> SraRunTable$date.txt
+done
+ ```
+
